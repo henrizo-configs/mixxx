@@ -49,61 +49,6 @@ var beta = alpha / 32;  // Adjust to suit.
  **************************/
 var loopsize = [2, 4, 8, 16, 0.125, 0.25, 0.5, 1];
 
-/************************  GPL v2 licence  *****************************
- * Numark Mixtrack Pro 3 controller script
- * Author: Stéphane Morin
- * Modified by: Radu Suciu
- *
- * Key features
- * ------------
- * - ICUT effect for scratching
- * - Fader Start
- * - press/double press/long press handling
- * - Smart PFL
- * - 4 deck support
- * - Full effect chains support from Deere Skin
- **********************************************************************
- * User References
- * ---------------
- * Wiki/manual : http://mixxx.org/wiki/doku.php/numark_mixtrack_pro_3
- * support forum : http://mixxx.org/forums/viewtopic.php?f=7&p=27984#p27984
- * e-mail : steph@smorin.com 
- *
- * Thanks
- * ----------------
- * Thanks to Chloé AVRILLON (DJ Chloé) and authors of other scripts and particularly 
- * to authors of Numark Dj2Go, KANE QuNeo, Vestax-VCI-400
- *
- * Revision history
- * ----------------
- * 2016-01-12 (V0.9) to 2016-01-15 (1.0 beta 3) - Chloé AVRILLON 
- * 2016-02-17 (1.0 beta 4) 2016-04-08 (V1.3 )- Stéphane Morin
- * 2016-04-08 (1.3) - Stéphane Morin - https://github.com/mixxxdj/mixxx/pull/905
- * 2016-09-14 (1.31) - Stefan Mikolajczyk - https://github.com/mixxxdj/mixxx/pull/1012
- * 2016-04-08 (1.4) to 2017-01-05 (2.2) - Stéphane Morin - https://github.com/mixxxdj/mixxx/pull/1014
- * 2017-02-10 (2.3) - Radu Suciu - https://github.com/mixxxdj/mixxx/pull/1180
- * 2018-01-20 (2.4) - NTMusic - Shift+Filter can control either FX4 or channel gain
- *
- ***********************************************************************
- *                           GPL v2 licence
- *                           -------------- 
- * Numark Mixtrack Pro 3 controller script 2.4 for Mixxx 2.1+
- * Copyright (C) 2016 Stéphane Morin
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- ***********************************************************************/
 ////////////////////////////////////////////////////////////////////////
 // JSHint configuration                                               //
 ////////////////////////////////////////////////////////////////////////
@@ -114,7 +59,6 @@ var loopsize = [2, 4, 8, 16, 0.125, 0.25, 0.5, 1];
 /* jshint sub:true                                                    */
 /* jshint shadow:true                                                 */
 ////////////////////////////////////////////////////////////////////////
-
 
 var NumarkMixtrack3 = {
     group: '[Master]',
@@ -1674,15 +1618,15 @@ NumarkMixtrack3.FXButton = function(channel, control, value, status, group) {
         // load next effect and make sure the unit is enabled
         engine.setValue(effectGroup, "next_effect", true);
     } else if (deck.TapDown) {
-        // toggle effect if InstantFX is not active
-        if (deck.InstantFX.indexOf(effectNum) === -1) {
-            script.toggleControl(effectGroup, "enabled");
-        }
-    } else {
         if (deck.getFocusedEffect() === effectNum) {
             deck.focusEffect(0);
         } else {
             deck.focusEffect(effectNum);
+        }       
+    } else {
+        // toggle effect if InstantFX is not active
+        if (deck.InstantFX.indexOf(effectNum) === -1) {
+            script.toggleControl(effectGroup, "enabled");
         }
     }
 };
@@ -1730,12 +1674,13 @@ NumarkMixtrack3.PitchBendMinusButton = function(channel, control, value, status,
 
     if (value === DOWN) {
         if (deck.shiftKey) {
-            engine.setValue(deck.group, "beatjump_backward", true);
-        } else {
-            engine.setValue(deck.group, "rate_temp_down", true);
+            engine.setValue(deck.group, "reset_key", true);
         }
+        else if (deck.TapDown) {
+            engine.setValue(deck.group, "beatjump_backward", true);
+        }        
     } else if (!deck.shiftKey) {
-        engine.setValue(deck.group, "rate_temp_down", false);
+        engine.setValue(deck.group, "pitch_down", true);
     }
 };
 
@@ -1744,12 +1689,13 @@ NumarkMixtrack3.PitchBendPlusButton = function(channel, control, value, status, 
 
     if (value === DOWN) {
         if (deck.shiftKey) {
+            engine.setValue(deck.group, "reset_key", true);
+        }
+        else if (deck.TapDown) {
             engine.setValue(deck.group, "beatjump_forward", true);
-        } else {
-            engine.setValue(deck.group, "rate_temp_up", true);
         }
     } else if (!deck.shiftKey) {
-        engine.setValue(deck.group, "rate_temp_up", false);
+        engine.setValue(deck.group, "pitch_up", true);
     }
 };
 
