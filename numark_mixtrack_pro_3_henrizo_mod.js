@@ -2,7 +2,7 @@
  * ==============      Configuration Options           =================
  * valid values are "true" or "false" unless specified
  **********************************************************************/
-// TrackEndWarning: "true": when you reach the end of the track, 
+// TrackEndWarning: "true": when you reach the end of the track,
 // the jog wheel Button will flash. "false": No flash of Jog Wheel Button
 var TrackEndWarning = true;
 
@@ -19,9 +19,9 @@ var noPlayOnSyncDoublePress = false;
 // Shift+Filter control behavior
 // true (default) - FX parameter 4 (when the FX is focused)
 // false - Channel Gain
-var ShiftFilterFX4 = true; 
+var ShiftFilterFX4 = true;
 
-// allow pitch bend with wheel when wheel is not active 
+// allow pitch bend with wheel when wheel is not active
 var PitchBendOnWheelOff = true;
 
 /**************************
@@ -43,7 +43,7 @@ var alpha = 1.0 / 8;    // Adjust to suit.
 var beta = alpha / 32;  // Adjust to suit.
 
 /**************************
- * Loop Size array 
+ * Loop Size array
  * first 4 values used for Autoloop Not shifted
  * last 4 values used for Autoloop Shifted
  **************************/
@@ -67,37 +67,37 @@ var loopsize = [2, 4, 8, 16, 0.125, 0.25, 0.5, 1];
  * ---------------
  * Wiki/manual : http://mixxx.org/wiki/doku.php/numark_mixtrack_pro_3
  * Scripting manual: https://www.mixxx.org/wiki/doku.php/midi_scripting
- *                   https://www.mixxx.org/wiki/doku.php/mixxxcontrols 
+ *                   https://www.mixxx.org/wiki/doku.php/mixxxcontrols
  * e-mail : steph@smorin.com, matheus.hs97@gmail.com
  *
  * Thanks
  * ----------------
- * Thanks to Chloé AVRILLON (DJ Chloé) and authors of other scripts and particularly 
+ * Thanks to Chloé AVRILLON (DJ Chloé) and authors of other scripts and particularly
  * to authors of Numark Dj2Go, KANE QuNeo, Vestax-VCI-400
  *
  * Revision history
  * ----------------
- * 2016-01-12 (V0.9) to 2016-01-15 (1.0 beta 3) - Chloé AVRILLON 
+ * 2016-01-12 (V0.9) to 2016-01-15 (1.0 beta 3) - Chloé AVRILLON
  * 2016-02-17 (1.0 beta 4) 2016-04-08 (V1.3 )- Stéphane Morin
  * 2016-04-08 (1.3) - Stéphane Morin - https://github.com/mixxxdj/mixxx/pull/905
  * 2016-09-14 (1.31) - Stefan Mikolajczyk - https://github.com/mixxxdj/mixxx/pull/1012
  * 2016-04-08 (1.4) to 2017-01-05 (2.2) - Stéphane Morin - https://github.com/mixxxdj/mixxx/pull/1014
  * 2017-02-10 (2.3) - Radu Suciu - https://github.com/mixxxdj/mixxx/pull/1180
  * 2018-01-20 (2.4) - NTMusic - Shift+Filter can control either FX4 or channel gain
- * 
+ *
  ** Henrizo mods (https://github.com/henrizo-configs/mixxx) :
  ** --------------------------------------------------------
- ** I decided to mod this config file so the controller adjusts to my needs and style. Of course, 
+ ** I decided to mod this config file so the controller adjusts to my needs and style. Of course,
  ** I'm standing in the shoulders of giants here. Thanks again to all the folks above.
  *
  * 2019-12-17 (V0) - Shift + reloop_exit : activates beatloop
-                   - Effects are focused with TAP + FX_ and activated with FX, unlike the original file, 
+                   - Effects are focused with TAP + FX_ and activated with FX, unlike the original file,
                      which inverts these controls.
-                   - The top corners pitch bend buttons sets the pitch (independent of the tempo) up or down, 
+                   - The top corners pitch bend buttons sets the pitch (independent of the tempo) up or down,
                    - and pressing Shift with these buttons resets the pitch.
  ***********************************************************************
  *                           GPL v2 licence
- *                           -------------- 
+ *                           --------------
  * Numark Mixtrack Pro 3 controller script 2.4 for Mixxx 2.1+
  * Copyright (C) 2016 Stéphane Morin
  *
@@ -105,12 +105,12 @@ var loopsize = [2, 4, 8, 16, 0.125, 0.25, 0.5, 1];
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -225,7 +225,7 @@ function sendShortMsg(control, midino, value) {
 }
 
 function parameterSoftTakeOver(group, control, value) {
-    var threshold = 0.07; //on the CMD Studio 4a this threshold got the right balance 
+    var threshold = 0.07; //on the CMD Studio 4a this threshold got the right balance
     //between smooth takeover and keeping up with quick turns, but you can adjust the value to suit your needs
     var currentKnobVal = value / 127;
     var currentParamVal = engine.getParameter(group, control);
@@ -303,7 +303,7 @@ LED.prototype.flashOn = function(num_ms_on, value, num_ms_off, flashCount, relig
     // stop pending timers
     this.flashOff();
 
-    // init     
+    // init
     this.flashDuration = num_ms_on;
     this.num_ms_on = num_ms_on;
     this.valueon = value;
@@ -417,7 +417,7 @@ LED.prototype.flashOnceOff = function(relight) {
 //                      the button only once before it becomes a long press).
 // doublePressTimeOut : delay in ms above which a second press on the
 //                      button will not be considered as a potential double
-//                      but as a new press cycle event (default = 400ms).   
+//                      but as a new press cycle event (default = 400ms).
 var SingleDoubleBtn = function(callback, doublePressTimeOut) {
     this.channel = 0;
     this.control = 0;
@@ -456,7 +456,7 @@ SingleDoubleBtn.prototype.buttonDecide = function() {
     this.buttonCount = 0;
 };
 
-// =======================  LongShortBtn    
+// =======================  LongShortBtn
 // callback           : callback function you have to provide (see end of the code), that will return
 //                      the original event parameters (channel, control, value, status, group)
 //                      and the kind of press event affecting your button (eventkind)
@@ -601,7 +601,7 @@ LongShortDoubleBtn.prototype.buttonDown = function(channel, control, value, stat
         );
 
     } else if (this.buttonCount === 1) { // 2nd press (before short timer's out)
-        // stop timers...           
+        // stop timers...
         if (this.buttonLongPressTimer !== 0) {
             engine.stopTimer(this.buttonLongPressTimer);
             this.buttonLongPressTimer = 0;
@@ -839,7 +839,7 @@ NumarkMixtrack3.sampler = function(decknum) {
 // Initialization of the mapping
 // =====================================================================
 NumarkMixtrack3.init = function(id, debug) {
-    // Set up the controller to manipulate decks 1 & 2 when this script is loaded 
+    // Set up the controller to manipulate decks 1 & 2 when this script is loaded
     print("********* Initialisation process engaged *****************");
     print("              Mapping initialization");
     print("");
@@ -912,7 +912,7 @@ NumarkMixtrack3.init = function(id, debug) {
     }
 
     NumarkMixtrack3.AllLeds = new LED(0x90 + ledCategories.master, leds.all);
-    // Turn ON all the lights: the only way PADMode Leds light up 
+    // Turn ON all the lights: the only way PADMode Leds light up
     NumarkMixtrack3.AllLeds.onOff(ON);
 
     NumarkMixtrack3.initDeck('[Channel1]', false); //Initial load, "remove" is set to false
@@ -938,7 +938,7 @@ NumarkMixtrack3.initDeck = function(group, remove) {
 
     // If "remove" = true, disconnect old deck's Mixxx controls from LEDs.
     // We always connect new deck's Mixxx controls to LEDs
-    NumarkMixtrack3.connectDeckControls(group, remove); 
+    NumarkMixtrack3.connectDeckControls(group, remove);
 
     // Toggle LED that indicates which deck is being controlled
     if (connectedLED <= 2) {
@@ -951,7 +951,7 @@ NumarkMixtrack3.initDeck = function(group, remove) {
 NumarkMixtrack3.connectDeckControls = function(group, remove) {
     // If the 'remove' parameter is not passed to this function, set remove = false
     remove = remove || false;
-    var onDeckNum = parseInt(NumarkMixtrack3.channelRegEx.exec(group)[1]); 
+    var onDeckNum = parseInt(NumarkMixtrack3.channelRegEx.exec(group)[1]);
     var offDeckNum = (onDeckNum + 1) % 4 + 1;
     var onDeck = NumarkMixtrack3.decks["D" + onDeckNum];
     var offDeck = NumarkMixtrack3.decks["D" + offDeckNum];
@@ -963,7 +963,7 @@ NumarkMixtrack3.connectDeckControls = function(group, remove) {
 
         // make sure that the shift is no longer active on either deck to prevent confusion
         offDeck.shiftKey = false;
-        onDeck.shiftKey = false; 
+        onDeck.shiftKey = false;
 
         for (var led in offDeck.LEDs) {
             if (led.hasOwnProperty('onOff')) {
@@ -974,12 +974,12 @@ NumarkMixtrack3.connectDeckControls = function(group, remove) {
         for (var i = 1; i <= 4; i++) {
             onDeck.LEDs["padLoop" + i].onOff(PADcolors.yellow);
         }
-    } 
+    }
 
     print("==========================================================");
     print("         Connect controls and triggers deck " + onDeckNum);
     print("");
-    
+
     var controlsToFunctions = {
         'hotcue_1_enabled': 'NumarkMixtrack3.OnHotcueChange',
         'hotcue_2_enabled': 'NumarkMixtrack3.OnHotcueChange',
@@ -1033,14 +1033,14 @@ NumarkMixtrack3.connectDeckControls = function(group, remove) {
         }
     }
 
-    if (!remove) { 
+    if (!remove) {
         for (var i = 1; i <= 4; i++) {
             engine.setValue("[EffectRack1_EffectUnit" + i + "_Effect1]", "enabled", false);
             engine.setValue("[EffectRack1_EffectUnit" + i + "_Effect2]", "enabled", false);
             engine.setValue("[EffectRack1_EffectUnit" + i + "_Effect3]", "enabled", false);
         }
     }
-    
+
     print("");
     print("               Initialisation completed");
     print("==========================================================");
@@ -1067,11 +1067,15 @@ NumarkMixtrack3.ShiftButton = function(channel, control, value, status, group) {
     deck.shiftKey = (value === DOWN);
 };
 
-/******************     Play Button :
- * - Press         : to Play / pause the track. If no track is loaded,
- *                   Load the selected track (if any) and play.
- * - SHIFT+ press : Go to Cue point and play (stutter).
- * *********************************************************************/
+/******************Play  Button  :
+
+- Press : to Play  / pause the track. If no track  is loaded, Load the
+ selected track  (if any) and play.  Deactivate reverse roll if  it is
+ active.
+
+ - SHIFT+  press : * Activates reverse row.
+
+*********************************************************************/
 NumarkMixtrack3.PlayButton = function(channel, control, value, status, group) {
     if (!value) return;
     var deck = NumarkMixtrack3.deckFromGroup(group);
@@ -1082,11 +1086,15 @@ NumarkMixtrack3.PlayButton = function(channel, control, value, status, group) {
             if (!deck.trackLoaded()) {
                 engine.setValue(deck.group, "LoadSelectedTrackAndPlay", true);
             } else {
-                script.toggleControl(deck.group, "play");
+                if (engine.getValue(deck.group, "reverseroll")) {
+                    engine.setValue(deck.group, "reverseroll", false)
+                } else {
+                    script.toggleControl(deck.group, "play");
+                }
             }
         } else {
-            // shifted: stutter
-            engine.setValue(deck.group, "play_stutter", true);
+            // shifted: play backwards
+            engine.setValue(deck.group, "reverseroll", true);
         }
     }
 };
@@ -1143,7 +1151,7 @@ NumarkMixtrack3.PadModeButton = function(channel, control, value, status, group)
     }
 
     // Now check which one should be blinking
-    // Need to check if loop is enabled; if yes, stop it , else start it 
+    // Need to check if loop is enabled; if yes, stop it , else start it
     //Autoloop
     if (value === DOWN) {
         for (var i = 0; i < loopsize.length; i++) {
@@ -1352,8 +1360,8 @@ NumarkMixtrack3.toggleJogMode = function(channel, control, value, status, group)
 };
 
 NumarkMixtrack3.WheelTouch = function(channel, control, value, status, group) {
-    /* 
-    This function sets the variable to assign the wheel move action 
+    /*
+    This function sets the variable to assign the wheel move action
     - Pitch bend / jog = default
     - fast seek - deck.seekingfast = true
     - iCut = deck.iCutStatus = true
@@ -1403,7 +1411,7 @@ NumarkMixtrack3.WheelMove = function(channel, control, value, status, group) {
         adjustedJog = value - 128;
     }
 
-    /*  This function performs that actions defined by wheel touch 
+    /*  This function performs that actions defined by wheel touch
         - Pitch bend / jog = default
         - fast seek - deck.seekingfast = true
         - iCut = deck.iCutStatus = true
@@ -1519,7 +1527,7 @@ NumarkMixtrack3.onPADSampleButtonHold = function(channel, control, value, status
     var padIndex = parseInt(group.substring(8, 9));
     var sampler = NumarkMixtrack3.samplers["S" + padIndex];
 
-    // the event is a Long Press, LONG_PRESS is true, we set a variable so that when the 
+    // the event is a Long Press, LONG_PRESS is true, we set a variable so that when the
     // pad button is lifted, the Sampler stops
     if (eventkind === LONG_PRESS) {
         engine.setValue(group, "stop", 1);
@@ -1591,7 +1599,7 @@ NumarkMixtrack3.onPADLoopButtonHold = function(channel, control, value, status, 
     } else {
         loopsizeNew = loopsize[padIndex - 1];
     }
-    
+
     if (eventkind === LONG_PRESS) {
         engine.setValue(deck.group, 'reloop_toggle', true);
     }
@@ -1606,7 +1614,7 @@ NumarkMixtrack3.OnPADLoopButtonChange = function(value, group, control) {
     } else {
         deck.LEDs["padLoop" + padIndex].onOff(PADcolors.yellow);
     }
-    
+
     // on initialization of deck, the value "0" would cause the pad LED to stop blinking on the 2nd pass
     // of triggers. This gives ensures that the PAD mode reflect the proper state of AutoLoop
     for (var i = 0; i < loopsize.length; i++) {
@@ -1620,28 +1628,6 @@ NumarkMixtrack3.OnPADLoopButtonChange = function(value, group, control) {
 
         if (test) {
             deck.LEDs["padLoop" + index].flashOn(300, PADcolors.yellow, 300);
-        }
-    }
-};
-
-NumarkMixtrack3.StripTouchEffect = function(channel, control, value, status, group) {
-    var deck = NumarkMixtrack3.deckFromGroup(group);
-    var focusedEffect = deck.getFocusedEffect();
-
-    if (deck.shiftKey) {
-        engine.setValue(deck.group, "playposition", value / 127);
-    } else {
-        if (deck.InstantFX.length) {
-            for (var i = 0; i < deck.InstantFX.length; i++) {
-                var fxGroup = "[EffectRack1_EffectUnit" + deck.decknum + "_Effect" + deck.InstantFX[i] + "]";
-                engine.setValue(fxGroup, "enabled", true);
-                engine.setValue(fxGroup, "meta", value / 127);
-            }
-        } else if (focusedEffect) {
-            var focusedGroup = "[EffectRack1_EffectUnit" + deck.decknum + "_Effect" + focusedEffect + "]";
-            engine.setValue(focusedGroup, "meta", value / 127);
-        } else {
-            engine.setValue("[EffectRack1_EffectUnit" + deck.decknum + "]", "super1", value / 127);
         }
     }
 };
@@ -1689,7 +1675,7 @@ NumarkMixtrack3.FXButton = function(channel, control, value, status, group) {
             deck.focusEffect(0);
         } else {
             deck.focusEffect(effectNum);
-        }       
+        }
     } else {
         // toggle effect if InstantFX is not active
         if (deck.InstantFX.indexOf(effectNum) === -1) {
@@ -1716,7 +1702,7 @@ NumarkMixtrack3.OnEffectEnabled = function(value, group, control) {
 NumarkMixtrack3.PFLButton = function(channel, control, value, status, group) {
     if (!value) return;
     var deck = NumarkMixtrack3.deckFromGroup(group);
-    
+
     if (value === DOWN) {
         if (deck.shiftKey) {
             script.toggleControl(group, "quantize");
@@ -1745,7 +1731,7 @@ NumarkMixtrack3.PitchBendMinusButton = function(channel, control, value, status,
         }
         else if (deck.TapDown) {
             engine.setValue(deck.group, "beatjump_backward", true);
-        }        
+        }
         else {
             engine.setValue(deck.group, "pitch_down", true);
         }
@@ -1778,11 +1764,22 @@ NumarkMixtrack3.BeatKnob = function(channel, control, value, status, group) {
         increment = -increment;
     }
 
+    var focusedEffect = deck.getFocusedEffect();
 
-    // direct interaction with knob, without any button combination
-    if (!deck.PADMode && !deck.shiftKey && !deck.TapDown) {
-        var mixValue = engine.getParameter("[EffectRack1_EffectUnit" + deck.decknum + "]", "mix");
-        engine.setParameter("[EffectRack1_EffectUnit" + deck.decknum + "]", "mix", mixValue + increment);
+    if (deck.InstantFX.length) {
+        for (var i = 0; i < deck.InstantFX.length; i++) {
+            var fxGroup = "[EffectRack1_EffectUnit" + deck.decknum + "_Effect" + deck.InstantFX[i] + "]";
+            var currentLevel = engine.getValue(fxGroup, "meta");
+            engine.setValue(fxGroup, "enabled", true);
+            engine.setValue(fxGroup, "meta", currentLevel + increment);
+        }
+    } else if (focusedEffect) {
+        var focusedGroup = "[EffectRack1_EffectUnit" + deck.decknum + "_Effect" + focusedEffect + "]";
+        var currentLevel = engine.getValue(focusedGroup, "meta");
+        engine.setValue(focusedGroup, "meta", currentLevel + increment);
+    } else {
+        var currentLevel = engine.getValue("[EffectRack1_EffectUnit" + deck.decknum + "]", "super1");
+        engine.setValue("[EffectRack1_EffectUnit" + deck.decknum + "]", "super1", currentLevel + increment);
     }
 
     // shift to change beatjump_size
@@ -1823,6 +1820,24 @@ NumarkMixtrack3.BeatKnob = function(channel, control, value, status, group) {
             var samplerGroup = '[Sampler' + i + ']';
             var gainValue = engine.getParameter(samplerGroup, 'pregain');
             engine.setParameter(samplerGroup, 'pregain', gainValue + increment);
+        }
+    }
+};
+
+
+NumarkMixtrack3.StripTouchEffect = function(channel, control, value, status, group) {
+    var deck = NumarkMixtrack3.deckFromGroup(group);
+    var focusedEffect = deck.getFocusedEffect();
+
+    var stripTouchValue = value / 127;
+
+    if (deck.shiftKey) {
+        engine.setValue(deck.group, "playposition", value / 127);
+    } else {
+        // direct interaction with knob, without any button combination
+        if (!deck.PADMode && !deck.shiftKey && !deck.TapDown) {
+            var mixValue = engine.getParameter("[EffectRack1_EffectUnit" + deck.decknum + "]", "mix");
+            engine.setParameter("[EffectRack1_EffectUnit" + deck.decknum + "]", "mix", stripTouchValue);
         }
     }
 };
@@ -1872,13 +1887,13 @@ NumarkMixtrack3.FilterKnob = function(channel, control, value, status, group) {
     // default behavior is to control filter
     // when shifted, change parameters of focused effect
     if (deck.shiftKey) {
-		// Default behavior for Shift+Filter is to change FX4 
+		// Default behavior for Shift+Filter is to change FX4
 		// for the currently focused effect
 		if(focusedEffect && ShiftFilterFX4) {
 			parameterSoftTakeOver(
 				"[EffectRack1_EffectUnit" + decknum + "_Effect" + focusedEffect + "]", "parameter4", value
 			);
-		} else {			
+		} else {
 			// Shift+Filter is mapped to channel gain otherwise
 			parameterSoftTakeOver("[Channel" + decknum + "]", "pregain", value);
 		}
