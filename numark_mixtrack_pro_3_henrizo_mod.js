@@ -19,7 +19,7 @@ var noPlayOnSyncDoublePress = false;
 // Shift+Filter control behavior
 // true (default) - FX parameter 4 (when the FX is focused)
 // false - Channel Gain
-var ShiftFilterFX4 = true;
+var ShiftFilterFX4 = false;
 
 // allow pitch bend with wheel when wheel is not active
 var PitchBendOnWheelOff = true;
@@ -67,7 +67,7 @@ var loopsize = [2, 4, 8, 16, 0.125, 0.25, 0.5, 1];
  * ---------------
  * Wiki/manual : http://mixxx.org/wiki/doku.php/numark_mixtrack_pro_3
  * Scripting manual: https://www.mixxx.org/wiki/doku.php/midi_scripting
- *                   https://www.mixxx.org/wiki/doku.php/mixxxcontrols
+ *                   https://manual.mixxx.org/2.3/en/chapters/advanced_topics.html#mixxx-controls
  * e-mail : steph@smorin.com, matheus.hs97@gmail.com
  *
  * Thanks
